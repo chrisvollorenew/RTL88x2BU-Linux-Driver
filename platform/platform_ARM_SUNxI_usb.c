@@ -20,7 +20,7 @@
  */
 
 #include <drv_types.h>
-#include <mach/sys_config.h>
+//#include <mach/sys_config.h>
 
 #ifdef CONFIG_PLATFORM_ARM_SUNxI
 extern int sw_usb_disable_hcd(__u32 usbc_no);
@@ -51,12 +51,14 @@ int platform_wifi_power_on(void)
 #ifndef CONFIG_RTL8723A
 	{
 		/* ----------get usb_wifi_usbc_num------------- */
+		/*
 		ret = script_parser_fetch("usb_wifi_para", "usb_wifi_usbc_num", (int *)&usb_wifi_host, 64);
 		if (ret != 0) {
 			RTW_INFO("ERR: script_parser_fetch usb_wifi_usbc_num failed\n");
 			ret = -ENOMEM;
 			goto exit;
 		}
+		*/
 		RTW_INFO("sw_usb_enable_hcd: usbc_num = %d\n", usb_wifi_host);
 		sw_usb_enable_hcd(usb_wifi_host);
 	}
@@ -65,6 +67,7 @@ int platform_wifi_power_on(void)
 
 #if defined(CONFIG_PLATFORM_ARM_SUN6I) || defined(CONFIG_PLATFORM_ARM_SUN7I)
 	{
+		/*
 		script_item_value_type_e type;
 
 		type = script_get_item("wifi_para", "wifi_usbc_id", &item);
@@ -73,7 +76,7 @@ int platform_wifi_power_on(void)
 			ret = -ENOMEM;
 			goto exit;
 		}
-
+		*/
 		printk("sw_usb_enable_hcd: usbc_num = %d\n", item.val);
 		wifi_pm_power(1);
 		mdelay(10);
